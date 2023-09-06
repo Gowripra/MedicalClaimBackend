@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Medical-Claim</name>
+    </assembly>
+    <members>
+        <member name="M:Medical_Claim.Controllers.ClaimProcessRegistrationsController.GetallClaims">
+            <summary>
+            Get all claimprocessor details
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.ClaimProcessRegistrationsController.Add(DataAccesLayer.Models.ClaimProcessRegistrationDTO)">
+            <summary>
+            Register/Add a claimprocessor details
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.ClaimsController.Get">
+            <summary>
+            Get all Claims
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.ClaimsController.GetClaim(System.Int32)">
+            <summary>
+            Get claims by their ID's
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.ClaimsController.NewClaim(DataAccesLayer.Models.ClaimsCreateDTO)">
+            <summary>
+            Add a claim by only policyholder
+            </summary>
+            <param name="claims"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.ClaimsController.StatusUpdateClaim(System.Int32,System.String)">
+            <summary>
+            Update the status of the claim by only claimprocessor
+            </summary>
+            <param name="id"></param>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.PolicyHoldersController.Getall">
+            <summary>
+            Get all policyholder details 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.PolicyHoldersController.GetbyId(System.Int32)">
+            <summary>
+            Get particular policyholder by their ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.PolicyHoldersController.Add(DataAccesLayer.Models.PolicyHolderDTO)">
+            <summary>
+            Register/Add a policyholder details
+            </summary>
+            <param name="p"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Controllers.UsersController.Login(DataAccesLayer.Models.LoginRequestDTO)">
+            <summary>
+            Login for both roles
+            </summary>
+            <param name="loginRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Medical_Claim.Logger.Log.logWrite(System.String)">
+            <summary>
+            method for logging
+            </summary>
+            <param name="logmessage"></param>
+        </member>
+    </members>
+</doc>
