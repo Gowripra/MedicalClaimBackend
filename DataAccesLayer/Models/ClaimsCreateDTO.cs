@@ -9,6 +9,7 @@ namespace DataAccesLayer.Models
     public class ClaimsCreateDTO
     {
         public int ClaimId { get; set; }
+       
         public int PolicyNumber { get; set; }
         public string PolicyHolderName { get; set; }
         public string PolicyType { get; set; }

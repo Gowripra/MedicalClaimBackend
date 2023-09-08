@@ -1,6 +1,7 @@
 using BusinessLogicLayer.Services;
 using DataAccesLayer;
 using Medical_Claim.DataAccess;
+using Medical_Claim.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -85,14 +86,15 @@ builder.Services.AddSwaggerGen(options =>
         options.IncludeXmlComments(Path.Combine(System.AppContext.BaseDirectory, "SwaggerAnnotation.xml"));
     }
 });
-
+builder.Logging.AddLog4Net();
 var app = builder.Build();
-
+app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 app.UseCors("AllowOrigin");
 app.UseHttpsRedirection();

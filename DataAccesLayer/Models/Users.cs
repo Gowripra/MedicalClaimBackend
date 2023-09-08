@@ -19,5 +19,6 @@ namespace DataAccesLayer.Models
         [Required(ErrorMessage = "Password is Required")]
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        
     }
 }

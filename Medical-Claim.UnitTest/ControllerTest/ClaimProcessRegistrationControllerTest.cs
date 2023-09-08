@@ -25,6 +25,11 @@ namespace Medical_Claim.UnitTest.ControllerTest
         DataContext context;
         IClaimRegService _repo;
         ClaimProcessRegistrationsController claimsController;
+        public ClaimProcessRegistrationControllerTest(IClaimRegService claimRegService)
+        {
+            _repo = claimRegService;
+            claimsController = new ClaimProcessRegistrationsController(_repo);
+        }
 
         [OneTimeSetUp]
         public void SetUp()
@@ -32,7 +37,7 @@ namespace Medical_Claim.UnitTest.ControllerTest
             context = new DataContext(dbContextOptions);
             context.Database.EnsureCreated();
             SeedDatabase();
-            claimsController = new ClaimProcessRegistrationsController((IClaimRegService)context);
+            claimsController = new ClaimProcessRegistrationsController(_repo);
         }
         [OneTimeTearDown]
         public void Cleanup()
@@ -70,10 +75,16 @@ namespace Medical_Claim.UnitTest.ControllerTest
             context.SaveChanges();
         }
         [Test]
+        public void GetallTest()
+        {
+            var result = claimsController.GetallClaims();
+            Assert.That(result, Is.TypeOf<OkObjectResult>());
+        }
+        [Test]
         public async Task NewClaimReg()
         {
-            ClaimProcessRegistrationsController claims = new ClaimProcessRegistrationsController((IClaimRegService)context);
-            var result = await claims.Add(new ClaimProcessRegistrationDTO
+            //ClaimProcessRegistrationsController claims = new ClaimProcessRegistrationsController(_repo);
+            var result = await claimsController.Add(new ClaimProcessRegistrationDTO
             {
                 ClaimRegID=4,
                 FullName="lsdmcksnjcks",

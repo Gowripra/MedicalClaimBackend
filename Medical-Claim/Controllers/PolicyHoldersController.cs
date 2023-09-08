@@ -31,9 +31,11 @@ namespace Medical_Claim.Controllers
         [HttpGet]
         public async Task<ActionResult<List<PolicyHolder>>> Getall()
         {
+            Log.logWrite("Getall method started..");
             try
             {
                 Log.logWrite("Here are the policyholder details");
+                Log.logWrite("Getall method ended..");
                 return Ok(await _repo.Getall());
             }
             catch(Exception ex)
@@ -50,6 +52,7 @@ namespace Medical_Claim.Controllers
         [HttpGet("ById")]
         public async Task<ActionResult> GetbyId(int id)
         {
+            Log.logWrite("GetbyId method started..");
             try
             {
                 Log.logWrite("You can get the plociholder details with their ID's");
@@ -62,6 +65,7 @@ namespace Medical_Claim.Controllers
                 {
                     return NotFound("Claim with id = " + id + " is Not Found");
                 }
+                Log.logWrite("GetbyId method ended..");
                 return Ok(claim);
             }
             catch (Exception ex)
@@ -79,11 +83,13 @@ namespace Medical_Claim.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Add(PolicyHolderDTO p)
         {
+            Log.logWrite("Add method started..");
             try
             {
                 Log.logWrite("Here you can add/register the policyholder details ");
                 if (await _repo.Register(p))
                 {
+                    Log.logWrite("Add method ended..");
                     return Ok("user added");
                 }
                 else

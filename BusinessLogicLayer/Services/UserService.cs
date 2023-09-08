@@ -1,5 +1,6 @@
 ﻿using DataAccesLayer.Models;
 using Medical_Claim.DataAccess;
+using Medical_Claim.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -28,7 +29,8 @@ namespace BusinessLogicLayer.Services
 
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequest)
         {
-            var user = await _context.users.FirstOrDefaultAsync(x => x.Email == loginRequest.Email );
+            var user = await _context.users.FirstOrDefaultAsync(x => x.Email == loginRequest.Email);
+            var user1 = await _context.policyHolders .FirstOrDefaultAsync(x => x.Email == loginRequest.Email);
             //if (user!=null)
             //{
             //    LoginResponseDTO response = new()
@@ -60,14 +62,32 @@ namespace BusinessLogicLayer.Services
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
-                LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
+                if (user.Role == "PolicyHolder")
                 {
-                    Token = tokenHandler.WriteToken(token),
-                    Role = user.Role,
-                    Email = user.Email
-                };
+                    LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
+                    {
+                        Token = tokenHandler.WriteToken(token),
+                        Role = user.Role,
+                        Email = user.Email,
+                        PolicyNumber = user1.PolicyId,
+                        PolicyHolderName = user1.PolicyHolderName,
+                        PolicyType=user1.PolicyType
+                    };
+                    return loginResponseDTO;
+                }
+                else
+                {
+                    LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
+                    {
+                        Token = tokenHandler.WriteToken(token),
+                        Role = user.Role,
+                        Email = user.Email,
+                    };
+                    return loginResponseDTO;
+                }
+               
 
-                return loginResponseDTO;
+                
             }
            
 
@@ -75,7 +95,9 @@ namespace BusinessLogicLayer.Services
             {
                 Token = "",
                 Role = "",
-                Email = ""
+                Email = "", 
+                PolicyNumber= 0,
+                PolicyHolderName=""
             };
         }
         private static bool VerifyPassword(string password, byte[] passwordHash, byte[] passwordSalt)

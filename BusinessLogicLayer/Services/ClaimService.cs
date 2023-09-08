@@ -62,6 +62,7 @@ namespace BusinessLogicLayer.Services
                 {
                     PolicyNumber = claimsCreateDTO.PolicyNumber,
                     PolicyHolderName = claimsCreateDTO.PolicyHolderName,
+                    
                     ClaimNumber = "",
                     DateofAdmitted = claimsCreateDTO.DateofAdmitted,
                     DateofDischarged = claimsCreateDTO.DateofDischarged,

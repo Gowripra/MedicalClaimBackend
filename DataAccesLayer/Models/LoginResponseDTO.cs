@@ -11,5 +11,8 @@ namespace DataAccesLayer.Models
         public string Email { get; set; }
         public string Role { get; set; }
         public string Token { get; set; }
+        public int PolicyNumber { get; set; }
+        public string PolicyHolderName { get; set; }
+        public string PolicyType { get; set; }
     }
 }

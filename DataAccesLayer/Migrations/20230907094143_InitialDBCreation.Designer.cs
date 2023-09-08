@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccesLayer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230826124502_InitialDBCreate")]
-    partial class InitialDBCreate
+    [Migration("20230907094143_InitialDBCreation")]
+    partial class InitialDBCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,6 +122,13 @@ namespace DataAccesLayer.Migrations
                     b.Property<byte[]>("PasswordSalt")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PolicyHolderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PolicyNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Role")
                         .IsRequired()

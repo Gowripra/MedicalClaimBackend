@@ -29,16 +29,21 @@ namespace Medical_Claim.Controllers
         [HttpGet("Getallclaims")]
         public async Task<ActionResult<List<Claims>>> Get()
         {
+            Log.logWrite("Get method started..");
             try
             {
                 Log.logWrite("Here you can get all the claims");
-                return Ok(await _repo.GetAll());
+                var result = await _repo.GetAll();
+                Log.logWrite("Get method ended..");
+                return Ok(result);
+                
             }
             catch (Exception ex)
             {
                 Log.logWrite(ex.ToString() + " " + "Get" + " " + DateTime.Now.ToString());
                 return BadRequest("Exception = " + ex.Message);
             }
+            
         }
         /// <summary>
         /// Get claims by their ID's
@@ -48,6 +53,7 @@ namespace Medical_Claim.Controllers
         [HttpGet("id", Name = "GetClaimById")]
         public async Task<ActionResult> GetClaim(int id)
         {
+            Log.logWrite("GetClaim method started..");
             try
             {
                 Log.logWrite("You can get the claims with their ID's");
@@ -60,6 +66,7 @@ namespace Medical_Claim.Controllers
                 {
                     return NotFound("Claim with id = " + id + " is Not Found");
                 }
+                Log.logWrite("GetClaim method ended..");
                 return Ok(claim);
             }
             catch (Exception ex)
@@ -67,6 +74,7 @@ namespace Medical_Claim.Controllers
                 Log.logWrite(ex.ToString() + " " + "GetClaim" + " " + DateTime.Now.ToString());
                 return BadRequest("Exception = " + ex.Message);
             }
+            
         }
         /// <summary>
         /// Add a claim by only policyholder
@@ -77,6 +85,7 @@ namespace Medical_Claim.Controllers
         [HttpPost("Newclaimregister")]
         public async Task<ActionResult> NewClaim(ClaimsCreateDTO claims)
         {
+            Log.logWrite("NewClaim method started..");
             try
             {
                 Log.logWrite("You can add the new claim here..");
@@ -85,6 +94,7 @@ namespace Medical_Claim.Controllers
                 {
                     return BadRequest("Maximum claim submission limit exceeded for this month");
                 }
+                Log.logWrite("NewClaim method ended..");
                 return CreatedAtRoute("GetClaimById", new { id = claims.ClaimId }, claim1);
             }
             catch (Exception ex)
@@ -103,6 +113,7 @@ namespace Medical_Claim.Controllers
         [HttpPut("Updateclaim")]
         public async Task<ActionResult> StatusUpdateClaim(int id,  string status)
         {
+            Log.logWrite("StatusUpdateClaim method started..");
             try
             {
                 //var controller = new PolicyHoldersController();
@@ -112,6 +123,7 @@ namespace Medical_Claim.Controllers
                 var claim = await _repo.GetClaim(id);
                 if (await _repo.UpdateClaimStatus(id, status))
                 {
+                    Log.logWrite("StatusUpdateClaim method ended..");
                     return Ok("Claim Status Updated Successfully and email sent successfully");
                 }
                 //else if (claim.Status == "Rejected" || claim.Status == "rejected")

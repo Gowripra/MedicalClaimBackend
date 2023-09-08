@@ -27,9 +27,11 @@ namespace Medical_Claim.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ClaimProcessRegistration>>> GetallClaims()
         {
+            Log.logWrite("GetallClaim method started..");
             try
             {
                 Log.logWrite("Here you can get all the claimprocessors details");
+                Log.logWrite("GetallClaim method ended..");
                 return Ok(await _repo.GetallClaims());
             }
             catch(Exception ex)
@@ -47,11 +49,13 @@ namespace Medical_Claim.Controllers
         [HttpPost("claimregister")]
         public async Task<ActionResult> Add(ClaimProcessRegistrationDTO p)
         {
+            Log.logWrite("Add method started..");
             try
             {
                 Log.logWrite("You can Add/register the claimprocessors details");
                 if (await _repo.ClaimRegister(p))
                 {
+                    Log.logWrite("Add method ended..");
                     return Ok("user added");
                 }
                 else

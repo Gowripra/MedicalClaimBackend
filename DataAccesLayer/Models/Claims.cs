@@ -12,6 +12,7 @@ namespace DataAccesLayer.Models
         [Key]
         public int ClaimId { get; set; }
         public string ClaimNumber { get; set; }
+        
         public int PolicyNumber { get; set; }
         public string PolicyHolderName { get; set; }
         public string PolicyType { get; set; }

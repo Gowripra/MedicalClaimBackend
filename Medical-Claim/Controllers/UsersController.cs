@@ -27,6 +27,8 @@ namespace Medical_Claim.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Login(LoginRequestDTO loginRequest)
         {
+            Log.logWrite("Login method started..");
+            //throw new System.Exception("An error occured");
             try
             {
                 Log.logWrite("By using this method you can login into the portal");
@@ -37,6 +39,7 @@ namespace Medical_Claim.Controllers
                     return BadRequest("Invalid Email or Password");
                 }
                 Log.logWrite("Login successfull...welcome user");
+                Log.logWrite("Login method ended..");
                 return Ok(response);
             }
             catch (Exception ex)
